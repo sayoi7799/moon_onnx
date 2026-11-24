@@ -1,0 +1,179 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "sayoi7799/moon_onnx/proto"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub const ATTR_FLOAT : Int32 = 1
+
+pub const ATTR_FLOATS : Int32 = 6
+
+pub const ATTR_GRAPH : Int32 = 5
+
+pub const ATTR_GRAPHS : Int32 = 10
+
+pub const ATTR_INT : Int32 = 2
+
+pub const ATTR_INTS : Int32 = 7
+
+pub const ATTR_SPARSE_TENSOR : Int32 = 11
+
+pub const ATTR_SPARSE_TENSORS : Int32 = 12
+
+pub const ATTR_STRING : Int32 = 3
+
+pub const ATTR_STRINGS : Int32 = 8
+
+pub const ATTR_TENSOR : Int32 = 4
+
+pub const ATTR_TENSORS : Int32 = 9
+
+pub const ATTR_TYPE_PROTO : Int32 = 13
+
+pub const ATTR_TYPE_PROTOS : Int32 = 14
+
+pub const ATTR_UNDEFINED : Int32 = 0
+
+pub const DT_BOOL : Int32 = 9
+
+pub const DT_DOUBLE : Int32 = 11
+
+pub const DT_FLOAT : Int32 = 1
+
+pub const DT_FLOAT16 : Int32 = 10
+
+pub const DT_INT16 : Int32 = 5
+
+pub const DT_INT32 : Int32 = 6
+
+pub const DT_INT64 : Int32 = 7
+
+pub const DT_INT8 : Int32 = 3
+
+pub const DT_STRING : Int32 = 8
+
+pub const DT_UINT16 : Int32 = 4
+
+pub const DT_UINT32 : Int32 = 12
+
+pub const DT_UINT64 : Int32 = 13
+
+pub const DT_UINT8 : Int32 = 2
+
+pub const DT_UNDEFINED : Int32 = 0
+
+pub fn attr_type_name(Int32) -> String
+
+pub fn data_type_name(Int32) -> String
+
+pub fn decode_model(BytesView) -> ModelProto raise DecodeError
+
+pub fn decode_tensor(BytesView) -> TensorProto raise DecodeError
+
+// Errors
+pub suberror DecodeError {
+  DecodeError(path~ : String, offset~ : Int32, msg~ : String)
+}
+pub impl Show for DecodeError
+
+// Types and methods
+pub(all) struct AttributeProto {
+  name : String
+  ref_attr_name : String
+  attr_type : Int32
+  f : Float?
+  i : Int64?
+  s : Bytes?
+  t : TensorProto?
+  g : GraphProto?
+  floats : Array[Float]
+  ints : Array[Int64]
+  strings : Array[Bytes]
+  tensors : Array[TensorProto]
+  graphs : Array[GraphProto]
+  sparse_tensor_count : Int32
+  type_proto_count : Int32
+}
+
+#derive(Eq, @debug.Debug)
+pub(all) enum Dim {
+  DimValue(Int64)
+  DimParam(String)
+  DimUnknown
+}
+
+pub(all) struct GraphProto {
+  name : String
+  nodes : Array[NodeProto]
+  initializers : Array[TensorProto]
+  sparse_initializer_count : Int32
+  inputs : Array[ValueInfo]
+  outputs : Array[ValueInfo]
+  value_infos : Array[ValueInfo]
+}
+
+pub(all) struct ModelProto {
+  ir_version : Int64
+  opset_imports : Array[OperatorSetId]
+  producer_name : String
+  producer_version : String
+  domain : String
+  model_version : Int64
+  graph : GraphProto?
+  function_count : Int32
+  training_info_count : Int32
+}
+
+pub(all) struct NodeProto {
+  inputs : Array[String]
+  outputs : Array[String]
+  name : String
+  op_type : String
+  domain : String
+  attributes : Array[AttributeProto]
+}
+
+#derive(Eq, @debug.Debug)
+pub(all) struct OperatorSetId {
+  domain : String
+  version : Int64
+}
+
+pub(all) struct TensorProto {
+  name : String
+  dims : Array[Int64]
+  data_type : Int32
+  raw_data : BytesView?
+  float_data : Array[Float]
+  int32_data : Array[Int32]
+  int64_data : Array[Int64]
+  double_data : Array[Double]
+  uint64_data : Array[UInt64]
+  string_data_count : Int32
+  data_location : Int32
+  external_data_count : Int32
+  has_segment : Bool
+}
+
+#derive(Eq, @debug.Debug)
+pub(all) enum TypeProto {
+  TensorType(elem_type~ : Int32, shape~ : Array[Dim]?)
+  SequenceType
+  MapType
+  OptionalType
+  SparseTensorType
+  OpaqueType
+  NoType
+}
+
+#derive(@debug.Debug)
+pub(all) struct ValueInfo {
+  name : String
+  value_type : TypeProto
+}
+
+// Type aliases
+
+// Traits
