@@ -1,0 +1,8 @@
+// Official ONNX backend tests; everything here is test-only.
+
+import {
+  "sayoi7799/moon_onnx/tensor",
+  "sayoi7799/moon_onnx/graph",
+  "sayoi7799/moon_onnx/runtime",
+  "moonbitlang/core/encoding/base64",
+} for "wbtest"

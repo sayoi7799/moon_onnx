@@ -56,14 +56,14 @@ def mbt_string(s: str) -> str:
     return "".join(out)
 
 
-def mbt_base64(data: bytes, indent: str = "  ") -> str:
+def mbt_base64(data: bytes, indent: str = "  ", width: int = 76) -> str:
     """A MoonBit multi-line string literal (#| lines) holding base64 data.
 
-    Lines are 76 characters; the MoonBit side decodes with
+    Lines are `width` characters; the MoonBit side decodes with
     `ignore_whitespace=true`.
     """
     b64 = base64.b64encode(data).decode("ascii")
-    lines = [b64[i : i + 76] for i in range(0, len(b64), 76)] or [""]
+    lines = [b64[i : i + width] for i in range(0, len(b64), width)] or [""]
     body = "\n".join(f"{indent}  #|{line}" for line in lines)
     return f"(\n{body}\n{indent})"
 
