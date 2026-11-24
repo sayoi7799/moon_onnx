@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "sayoi7799/moon_onnx/runtime"
+
+import {
+  "sayoi7799/moon_onnx/graph",
+  "sayoi7799/moon_onnx/tensor",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct Session {
+  model : @graph.Model
+}
+pub fn Session::from_bytes(Bytes) -> Self raise @graph.OnnxError
+pub fn Session::from_bytes_view(BytesView) -> Self raise @graph.OnnxError
+pub fn Session::inputs(Self) -> Array[@graph.ValueSpec]
+pub fn Session::node_count(Self) -> Int32
+pub fn Session::operators(Self) -> Array[String]
+pub fn Session::opset(Self) -> Int32
+pub fn Session::outputs(Self) -> Array[@graph.ValueSpec]
+pub fn Session::producer(Self) -> String
+pub fn Session::run(Self, Array[(String, @tensor.Tensor)]) -> Array[(String, @tensor.Tensor)] raise @graph.OnnxError
+pub fn Session::run1(Self, @tensor.Tensor) -> @tensor.Tensor raise @graph.OnnxError
+
+// Type aliases
+
+// Traits

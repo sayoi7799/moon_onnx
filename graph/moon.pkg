@@ -1,0 +1,5 @@
+import {
+  "sayoi7799/moon_onnx/proto",
+  "sayoi7799/moon_onnx/tensor",
+  "sayoi7799/moon_onnx/ops",
+}

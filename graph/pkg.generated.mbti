@@ -1,0 +1,69 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "sayoi7799/moon_onnx/graph"
+
+import {
+  "moonbitlang/core/debug",
+  "sayoi7799/moon_onnx/tensor",
+}
+
+// Values
+pub fn load(BytesView) -> Model raise OnnxError
+
+// Errors
+pub(all) suberror OnnxError {
+  DecodeFailed(String)
+  Unsupported(String)
+  InvalidModel(String)
+  InvalidInput(String)
+  RuntimeFailure(String)
+}
+pub fn OnnxError::message(Self) -> String
+pub impl Show for OnnxError
+
+// Types and methods
+#derive(Eq, @debug.Debug)
+pub(all) enum Dim {
+  Fixed(Int32)
+  Symbolic(String)
+  Unknown
+}
+pub impl Show for Dim
+
+pub struct Model {
+  opset : Int32
+  ir_version : Int64
+  producer : String
+  inputs : Array[ValueSpec]
+  input_slots : Array[Int32]
+  outputs : Array[ValueSpec]
+  output_slots : Array[Int32]
+  constants : Array[(Int32, @tensor.Tensor)]
+  num_slots : Int32
+  steps : Array[Step]
+  release : Array[Array[Int32]]
+  node_count : Int32
+}
+pub fn Model::inputs(Self) -> Array[ValueSpec]
+pub fn Model::ir_version(Self) -> Int64
+pub fn Model::node_count(Self) -> Int32
+pub fn Model::operators(Self) -> Array[String]
+pub fn Model::opset(Self) -> Int32
+pub fn Model::outputs(Self) -> Array[ValueSpec]
+pub fn Model::producer(Self) -> String
+pub fn Model::run(Self, Array[(String, @tensor.Tensor)]) -> Array[(String, @tensor.Tensor)] raise OnnxError
+
+type Step
+
+pub struct ValueSpec {
+  name : String
+  dtype : @tensor.DType
+  shape : Array[Dim]?
+}
+pub fn ValueSpec::dtype(Self) -> @tensor.DType
+pub fn ValueSpec::name(Self) -> String
+pub fn ValueSpec::shape(Self) -> Array[Dim]?
+pub fn ValueSpec::to_string(Self) -> String
+
+// Type aliases
+
+// Traits
