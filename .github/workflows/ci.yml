@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [wasm-gc, js, native]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Cache models
+        uses: actions/cache@v4
+        with:
+          path: .cache/models
+          key: models-${{ hashFiles('scripts/fetch_models.py') }}
+
+      - name: Download models (sha256-checked)
+        run: |
+          python -m pip install -r scripts/requirements.txt
+          python scripts/fetch_models.py
+
+      - name: moon check
+        run: moon check --target ${{ matrix.target }}
+
+      - name: moon test
+        run: moon test --target ${{ matrix.target }} 2>&1 | tee test.log
+
+      - name: Every model test ran (none skipped)
+        run: "! grep -q '^SKIPPED' test.log"
