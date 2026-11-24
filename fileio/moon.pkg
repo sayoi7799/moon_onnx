@@ -1,0 +1,12 @@
+// File reading for tests and the command-line tool (not used by the runtime).
+// native / wasm-gc: moonbitlang/x/fs (wasm-gc goes through moonrun);
+// js: Node's fs module via FFI.
+
+#cfg(not(target="js"))
+import {
+  "moonbitlang/x/fs",
+}
+
+options(
+  targets: { "fileio_js.mbt": [ "js" ], "fileio_fs.mbt": [ "not", "js" ] },
+)

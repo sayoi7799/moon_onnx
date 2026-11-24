@@ -11,3 +11,7 @@ license = "Apache-2.0"
 keywords = [ "onnx", "inference", "machine-learning", "neural-network" ]
 
 description = "A pure MoonBit ONNX inference runtime for js, wasm-gc and native"
+
+import {
+  "moonbitlang/x@0.5.9",
+}
