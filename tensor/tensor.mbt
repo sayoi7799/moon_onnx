@@ -120,7 +120,7 @@ pub fn Data::zeros(dtype : DType, n : Int32) -> Data {
 }
 
 ///|
-pub suberror TensorError {
+pub(all) suberror TensorError {
   TensorError(String)
 }
 

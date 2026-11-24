@@ -1,0 +1,8 @@
+import {
+  "sayoi7799/moon_onnx/proto",
+  "sayoi7799/moon_onnx/tensor",
+  "moonbitlang/core/math",
+  "moonbitlang/core/float",
+  "moonbitlang/core/double",
+  "moonbitlang/core/encoding/utf8",
+}

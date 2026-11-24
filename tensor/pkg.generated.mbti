@@ -32,7 +32,7 @@ pub fn shapes_equal(FixedArray[Int32], FixedArray[Int32]) -> Bool
 pub fn strides(FixedArray[Int32]) -> FixedArray[Int32]
 
 // Errors
-pub suberror TensorError {
+pub(all) suberror TensorError {
   TensorError(String)
 }
 pub impl Show for TensorError

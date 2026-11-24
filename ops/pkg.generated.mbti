@@ -1,0 +1,79 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "sayoi7799/moon_onnx/ops"
+
+import {
+  "sayoi7799/moon_onnx/proto",
+  "sayoi7799/moon_onnx/tensor",
+}
+
+// Values
+pub let max_supported_opset : Int32
+
+pub fn prepare(NodeInfo) -> Kernel raise
+
+pub fn resolve_version(String, Int32) -> Int32 raise
+
+pub fn sgemm_acc(Int32, Int32, Int32, FixedArray[Float], Int32, FixedArray[Float], Int32, FixedArray[Float], Int32) -> Unit
+
+pub fn supported_ops() -> Array[String]
+
+// Errors
+pub(all) suberror OpError {
+  OpError(String)
+}
+pub impl Show for OpError
+
+// Types and methods
+pub(all) enum AttrValue {
+  AFloat(Float)
+  AInt(Int64)
+  AString(Bytes)
+  ATensor(@tensor.Tensor)
+  AFloats(Array[Float])
+  AInts(Array[Int64])
+  AStrings(Array[Bytes])
+  AUnsupported(String)
+}
+pub fn AttrValue::kind(Self) -> String
+
+pub struct Attrs {
+  values : Map[String, AttrValue]
+}
+pub fn Attrs::empty() -> Self
+pub fn Attrs::flag(Self, String, Bool) -> Bool raise
+pub fn Attrs::float(Self, String, Float) -> Float raise
+pub fn Attrs::float_opt(Self, String) -> Float? raise
+pub fn Attrs::floats(Self, String) -> Array[Float]? raise
+pub fn Attrs::from_array(Array[(String, AttrValue)]) -> Self
+pub fn Attrs::from_proto(Array[@proto.AttributeProto]) -> Self raise
+pub fn Attrs::has(Self, String) -> Bool
+pub fn Attrs::int(Self, String, Int64) -> Int64 raise
+pub fn Attrs::int_opt(Self, String) -> Int64? raise
+pub fn Attrs::ints(Self, String) -> Array[Int64]? raise
+pub fn Attrs::names(Self) -> Array[String]
+pub fn Attrs::string(Self, String, String) -> String raise
+pub fn Attrs::tensor(Self, String) -> @tensor.Tensor? raise
+
+pub struct Kernel {
+  output_types : Array[@tensor.DType]
+  run : (Array[@tensor.Tensor?]) -> Array[@tensor.Tensor] raise
+}
+pub fn Kernel::new(Array[@tensor.DType], (Array[@tensor.Tensor?]) -> Array[@tensor.Tensor] raise) -> Self
+
+pub struct NodeInfo {
+  op_type : String
+  since : Int32
+  attrs : Attrs
+  present : Array[Bool]
+  input_types : Array[@tensor.DType?]
+  constants : Array[@tensor.Tensor?]
+  num_outputs : Int32
+}
+pub fn NodeInfo::constant(Self, Int32) -> @tensor.Tensor?
+pub fn NodeInfo::has_input(Self, Int32) -> Bool
+pub fn NodeInfo::input_type(Self, Int32) -> @tensor.DType raise
+pub fn NodeInfo::new(String, Int32, Attrs, Array[Bool], Array[@tensor.DType?], Array[@tensor.Tensor?], Int32) -> Self
+
+// Type aliases
+
+// Traits
