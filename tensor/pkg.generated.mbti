@@ -1,0 +1,95 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "sayoi7799/moon_onnx/tensor"
+
+import {
+  "moonbitlang/core/debug",
+  "sayoi7799/moon_onnx/proto",
+}
+
+// Values
+pub fn broadcast_all(Array[FixedArray[Int32]]) -> FixedArray[Int32] raise TensorError
+
+pub fn broadcast_shapes(FixedArray[Int32], FixedArray[Int32]) -> FixedArray[Int32] raise TensorError
+
+pub fn broadcast_strides(FixedArray[Int32], FixedArray[Int32]) -> FixedArray[Int32]
+
+pub fn for_each_broadcast1(FixedArray[Int32], FixedArray[Int32], (Int32, Int32) -> Unit) -> Unit
+
+pub fn for_each_broadcast2(FixedArray[Int32], FixedArray[Int32], FixedArray[Int32], (Int32, Int32, Int32) -> Unit) -> Unit
+
+pub fn from_proto(@proto.TensorProto) -> Tensor raise TensorError
+
+pub fn from_proto_bytes(BytesView) -> Tensor raise
+
+pub fn normalize_axis(Int64, Int32) -> Int32 raise TensorError
+
+pub fn numel(FixedArray[Int32]) -> Int32 raise TensorError
+
+pub fn shape_to_string(FixedArray[Int32]) -> String
+
+pub fn shapes_equal(FixedArray[Int32], FixedArray[Int32]) -> Bool
+
+pub fn strides(FixedArray[Int32]) -> FixedArray[Int32]
+
+// Errors
+pub suberror TensorError {
+  TensorError(String)
+}
+pub impl Show for TensorError
+
+// Types and methods
+#derive(Eq, @debug.Debug)
+pub(all) enum DType {
+  F32
+  F64
+  I32
+  I64
+  U8
+  Bool
+}
+pub fn DType::from_onnx_code(Int32) -> Self?
+pub fn DType::is_float(Self) -> Bool
+pub fn DType::is_integer(Self) -> Bool
+pub fn DType::name(Self) -> String
+pub fn DType::onnx_code(Self) -> Int32
+pub impl Show for DType
+
+pub(all) enum Data {
+  F32(FixedArray[Float])
+  F64(FixedArray[Double])
+  I32(FixedArray[Int32])
+  I64(FixedArray[Int64])
+  U8(FixedArray[Byte])
+  Bool(FixedArray[Bool])
+}
+pub fn Data::dtype(Self) -> DType
+pub fn Data::length(Self) -> Int32
+pub fn Data::zeros(DType, Int32) -> Self
+
+pub struct Tensor {
+  shape : FixedArray[Int32]
+  data : Data
+}
+pub fn Tensor::bool(Array[Int32], Array[Bool]) -> Self raise TensorError
+pub fn Tensor::data(Self) -> Data
+pub fn Tensor::dtype(Self) -> DType
+pub fn Tensor::f32(Array[Int32], Array[Float]) -> Self raise TensorError
+pub fn Tensor::f64(Array[Int32], Array[Double]) -> Self raise TensorError
+pub fn Tensor::i32(Array[Int32], Array[Int32]) -> Self raise TensorError
+pub fn Tensor::i64(Array[Int32], Array[Int64]) -> Self raise TensorError
+pub fn Tensor::new(FixedArray[Int32], Data) -> Self raise TensorError
+pub fn Tensor::rank(Self) -> Int32
+pub fn Tensor::reshaped(Self, FixedArray[Int32]) -> Self raise TensorError
+pub fn Tensor::scalar_f32(Float) -> Self
+pub fn Tensor::scalar_i64(Int64) -> Self
+pub fn Tensor::shape(Self) -> FixedArray[Int32]
+pub fn Tensor::size(Self) -> Int32
+pub fn Tensor::to_f32_array(Self) -> FixedArray[Float] raise TensorError
+pub fn Tensor::to_i64_array(Self) -> FixedArray[Int64] raise TensorError
+pub fn Tensor::to_string_brief(Self) -> String
+pub fn Tensor::u8(Array[Int32], Array[Byte]) -> Self raise TensorError
+pub fn Tensor::zeros(DType, FixedArray[Int32]) -> Self raise TensorError
+
+// Type aliases
+
+// Traits
