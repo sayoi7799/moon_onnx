@@ -1,0 +1,8 @@
+// Whole-model tests against onnxruntime (test-only package).
+
+import {
+  "sayoi7799/moon_onnx/tensor",
+  "sayoi7799/moon_onnx/runtime",
+  "sayoi7799/moon_onnx/vision",
+  "sayoi7799/moon_onnx/fileio",
+} for "wbtest"

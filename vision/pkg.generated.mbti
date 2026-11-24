@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "sayoi7799/moon_onnx/vision"
+
+import {
+  "sayoi7799/moon_onnx/tensor",
+}
+
+// Values
+pub fn imagenet_normalize(@tensor.Tensor) -> @tensor.Tensor raise
+
+pub fn softmax(FixedArray[Float]) -> FixedArray[Double]
+
+pub fn top_k(FixedArray[Float], Int32) -> Array[Int32]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
