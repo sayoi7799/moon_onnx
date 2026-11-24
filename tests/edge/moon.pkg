@@ -1,0 +1,8 @@
+// Edge-case tests (test-only package).
+
+import {
+  "sayoi7799/moon_onnx/tensor",
+  "sayoi7799/moon_onnx/runtime",
+  "sayoi7799/moon_onnx/fileio",
+  "moonbitlang/core/encoding/base64",
+} for "wbtest"
