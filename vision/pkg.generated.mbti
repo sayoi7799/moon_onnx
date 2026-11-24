@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn decode_image(Bytes) -> Image raise
+
 pub fn imagenet_normalize(@tensor.Tensor) -> @tensor.Tensor raise
 
 pub fn softmax(FixedArray[Float]) -> FixedArray[Double]
@@ -15,6 +17,17 @@ pub fn top_k(FixedArray[Float], Int32) -> Array[Int32]
 // Errors
 
 // Types and methods
+pub struct Image {
+  width : Int32
+  height : Int32
+  rgb : FixedArray[Byte]
+}
+pub fn Image::height(Self) -> Int32
+pub fn Image::resize(Self, Int32, Int32) -> Self
+pub fn Image::resize_center_crop(Self, Int32, Int32) -> Self
+pub fn Image::to_chw(Self) -> @tensor.Tensor raise
+pub fn Image::to_gray(Self, Bool) -> @tensor.Tensor raise
+pub fn Image::width(Self) -> Int32
 
 // Type aliases
 

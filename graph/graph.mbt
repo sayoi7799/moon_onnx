@@ -407,7 +407,13 @@ pub fn load(bytes : BytesView) -> Model raise OnnxError {
       n.outputs.length(),
     )
     let kernel = @ops.prepare(info) catch {
-      e => raise Unsupported("\{label} (\{n.op_type}-\{since}): \{e}")
+      e => {
+        let versioned = label.replace(
+          old="(\{n.op_type})",
+          new="(\{n.op_type}-\{since})",
+        )
+        raise Unsupported("\{versioned}: \{e}")
+      }
     }
     let out_ids = []
     for k, o in n.outputs {

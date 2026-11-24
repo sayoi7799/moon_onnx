@@ -1,0 +1,13 @@
+import {
+  "sayoi7799/moon_onnx/tensor",
+  "sayoi7799/moon_onnx/graph",
+  "sayoi7799/moon_onnx/runtime",
+  "sayoi7799/moon_onnx/vision",
+  "sayoi7799/moon_onnx/fileio",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
+  "moonbitlang/core/double",
+  "moonbitlang/core/encoding/utf8",
+}
+
+pkgtype(kind: "executable")

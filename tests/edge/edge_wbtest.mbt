@@ -219,3 +219,26 @@ test "empty tensors flow through the graph like onnxruntime" {
     assert_eq(vals[i].to_double(), v)
   }
 }
+
+///|
+test "error messages quoted in the README" {
+  inspect(
+    load_error("unsupported_op"),
+    content="unsupported: node #0 'erf_node' (Erf): operator 'Erf' is not supported",
+  )
+  inspect(
+    load_error("bn_training"),
+    content="unsupported: node #0 'bn' (BatchNormalization-15): BatchNormalization with training_mode=1 is not supported",
+  )
+  let s = @runtime.Session::from_bytes(mnist())
+  let msg = try {
+    ignore(s.run([("Input3", @tensor.Tensor::zeros(F32, [1, 1, 27, 28]))]))
+    ""
+  } catch {
+    e => Show::to_string(e)
+  }
+  inspect(
+    msg,
+    content="invalid input: input 'Input3' dimension 2 must be 28, got 27 (shape [1,1,27,28])",
+  )
+}
