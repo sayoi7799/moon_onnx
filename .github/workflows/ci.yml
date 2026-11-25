@@ -38,6 +38,9 @@ jobs:
           python -m pip install -r scripts/requirements.txt
           python scripts/fetch_models.py
 
+      - name: Fetch the mooncakes registry index (for moonbitlang/x)
+        run: moon update
+
       - name: moon check
         run: moon check --target ${{ matrix.target }}
 
